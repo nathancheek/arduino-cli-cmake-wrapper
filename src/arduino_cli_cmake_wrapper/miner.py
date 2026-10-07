@@ -4,6 +4,7 @@ Handles the data mining operations on the output of the build stages.
 """
 
 import logging
+import shlex
 from functools import partial
 from pathlib import Path
 from typing import Callable
@@ -314,6 +315,36 @@ def identify_archive_line(stages: Dict[Stage, List[str]]) -> str:
     return archive_line
 
 
+def expand_grouped_response_files(line: str) -> str:
+    """Expand response files found inside a linker group.
+
+    Some cores (e.g. esp32 3.x) pass their libraries to the linker as a
+    response file (``@file``) between ``-Wl,--start-group`` and
+    ``-Wl,--end-group``. Those libraries must stay in the group, after
+    the objects, so each such response file is replaced by the tokens it
+    contains. Response files outside a group are kept as they are.
+
+    Args:
+        line: link line to expand
+
+    Returns:
+        link line with grouped response files expanded
+    """
+    tokens: List[str] = []
+    in_group = False
+    for token in safe_split(line):
+        if token.endswith('--start-group'):
+            in_group = True
+        elif token.endswith('--end-group'):
+            in_group = False
+        response_file = Path(token[1:])
+        if in_group and token.startswith('@') and response_file.is_file():
+            tokens.extend(safe_split(response_file.read_text()))
+        else:
+            tokens.append(token)
+    return shlex.join(tokens)
+
+
 def link_tokens(
     stages: Dict[Stage, List[str]], sources: Dict[Source, Path]
 ) -> Tuple[str, List[str], List[str], List[str]]:
@@ -337,7 +368,7 @@ def link_tokens(
             and a list of link libraries.
     """
     object_names = [f'{name}.o' for name in real_source_names(sources).values()]
-    link_line = identify_link_line(stages, object_names)
+    link_line = expand_grouped_response_files(identify_link_line(stages, object_names))
 
     class Cleaner(FilterProtocol):
         """Filter to clean out -c -o <arg> and filename arguments."""
