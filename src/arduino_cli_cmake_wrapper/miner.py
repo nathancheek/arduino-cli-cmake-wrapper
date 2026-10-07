@@ -183,12 +183,10 @@ def sketch_cache(stages: Dict[Stage, List[str]]) -> Path:
     Return:
         path to Arduino cache directory
     """
-    core_lines = stages.get(Stage.CORE)
-    if not core_lines:
-        raise MissingStageException(Stage.CORE)
-
     core_tokens = [
-        token for token in safe_split(core_lines[-1]) if token.endswith('core.a')
+        token
+        for token in safe_split(identify_archive_line(stages))
+        if token.endswith('core.a')
     ]
     assert core_tokens, 'Could not find core.a'
     core_archive = core_tokens[0]
