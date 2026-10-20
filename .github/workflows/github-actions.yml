@@ -127,24 +127,6 @@ jobs:
           python_arch: arm64
           tox_env: py314
           os: macos-latest
-        - name: pypy39 (ubuntu)
-          python: pypy-3.9
-          toxpython: pypy3.9
-          python_arch: x64
-          tox_env: pypy39
-          os: ubuntu-latest
-        - name: pypy39 (windows)
-          python: pypy-3.9
-          toxpython: pypy3.9
-          python_arch: x64
-          tox_env: pypy39
-          os: windows-latest
-        - name: pypy39 (macos)
-          python: pypy-3.9
-          toxpython: pypy3.9
-          python_arch: arm64
-          tox_env: pypy39
-          os: macos-latest
         - name: pypy310 (ubuntu)
           python: pypy-3.10
           toxpython: pypy3.10
@@ -162,6 +144,42 @@ jobs:
           toxpython: pypy3.10
           python_arch: arm64
           tox_env: pypy310
+          os: macos-latest
+        - name: pypy311 (ubuntu)
+          python: pypy-3.11
+          toxpython: pypy3.11
+          python_arch: x64
+          tox_env: pypy311
+          os: ubuntu-latest
+        - name: pypy311 (windows)
+          python: pypy-3.11
+          toxpython: pypy3.11
+          python_arch: x64
+          tox_env: pypy311
+          os: windows-latest
+        - name: pypy311 (macos)
+          python: pypy-3.11
+          toxpython: pypy3.11
+          python_arch: arm64
+          tox_env: pypy311
+          os: macos-latest
+        - name: pypy312 (ubuntu)
+          python: pypy-3.12
+          toxpython: pypy3.12
+          python_arch: x64
+          tox_env: pypy312
+          os: ubuntu-latest
+        - name: pypy312 (windows)
+          python: pypy-3.12
+          toxpython: pypy3.12
+          python_arch: x64
+          tox_env: pypy312
+          os: windows-latest
+        - name: pypy312 (macos)
+          python: pypy-3.12
+          toxpython: pypy3.12
+          python_arch: arm64
+          tox_env: pypy312
           os: macos-latest
     steps:
     - uses: actions/checkout@v4
