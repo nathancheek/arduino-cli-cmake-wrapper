@@ -91,6 +91,42 @@ jobs:
           python_arch: arm64
           tox_env: py312
           os: macos-latest
+        - name: py313 (ubuntu)
+          python: '3.13'
+          toxpython: python3.13
+          python_arch: x64
+          tox_env: py313
+          os: ubuntu-latest
+        - name: py313 (windows)
+          python: '3.13'
+          toxpython: python3.13
+          python_arch: x64
+          tox_env: py313
+          os: windows-latest
+        - name: py313 (macos)
+          python: '3.13'
+          toxpython: python3.13
+          python_arch: arm64
+          tox_env: py313
+          os: macos-latest
+        - name: py314 (ubuntu)
+          python: '3.14'
+          toxpython: python3.14
+          python_arch: x64
+          tox_env: py314
+          os: ubuntu-latest
+        - name: py314 (windows)
+          python: '3.14'
+          toxpython: python3.14
+          python_arch: x64
+          tox_env: py314
+          os: windows-latest
+        - name: py314 (macos)
+          python: '3.14'
+          toxpython: python3.14
+          python_arch: arm64
+          tox_env: py314
+          os: macos-latest
         - name: pypy39 (ubuntu)
           python: pypy-3.9
           toxpython: pypy3.9
