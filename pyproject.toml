@@ -11,7 +11,7 @@ name = "arduino-cli-cmake-wrapper"
 dynamic = ["version"]
 description = "A wrapper for arduino CLI allowing it to integrate with a CMakeSystem"
 readme = "README.rst"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {file = "LICENSE"}
 keywords = ["fprime", "embedded", "nasa", "arduino", "cmake"]
 authors = [
@@ -27,7 +27,6 @@ classifiers = [
     "Operating System :: POSIX",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
